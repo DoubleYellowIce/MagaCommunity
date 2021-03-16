@@ -34,6 +34,7 @@ public class bulletin extends AppCompatActivity {
         setSupportActionBar(toolbar);
         DialogSettings.style = DialogSettings.STYLE.STYLE_IOS;
         FloatingActionButton fab=(FloatingActionButton) findViewById(R.id.fab);
+        if (!UsersLoginState.getIsManger())fab.hide();//如果用户不是管理员，添加公告按钮不可见
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -41,31 +42,8 @@ public class bulletin extends AppCompatActivity {
             }
         });
         }
-    public boolean onCreateOptionsMenu(Menu menu){
-        getMenuInflater().inflate(R.menu.toolbar1,menu);
-        return true;
-    }
-    public boolean onOptionsItemSelected(MenuItem item){
-        switch (item.getItemId()){
-            case R.id.ic_user:
-                if (!UsersLoginState.getLoginstate()) {
-                    PasswordCorrectState();
-                }else {
-                    MessageDialog.show(bulletin.this, "温馨提示", "管理员身份已确认,您可以对公告内容进行编辑删除添加操作。", "确定");
-                }
-                break;
-            default:
-                break;
-        }
-        return true;
-    }
     private void gotoAddBulletin() {
-        if (UsersLoginState.getLoginstate()) {
-            gotoAddbulletin();
-        }else if (!UsersLoginState.getLoginstate()){
-            MessageDialog.show(bulletin.this,"温馨提示","你还未登录管理员身份，请先点击右上角用户按钮进行登录后再进行后续操作。") ;
-
-        }
+        gotoAddbulletin();
     }
     private void gotoAddbulletin() {
         Intent intent = new Intent(bulletin.this, Bulletin_add.class);

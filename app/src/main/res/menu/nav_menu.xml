@@ -7,8 +7,15 @@
             android:title="登录账号" />
 
         <item
+            android:id="@+id/ic_setting"
+            android:icon="@drawable/ic_setting"
+            android:title="帮助"
+            />
+        <item
             android:id="@+id/ic_help"
             android:icon="@drawable/ic_help"
             android:title="帮助" />
+
+
     </group>
 </menu>
