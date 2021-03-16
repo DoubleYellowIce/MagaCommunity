@@ -34,6 +34,7 @@ public class bulletin extends AppCompatActivity {
         setSupportActionBar(toolbar);
         DialogSettings.style = DialogSettings.STYLE.STYLE_IOS;
         FloatingActionButton fab=(FloatingActionButton) findViewById(R.id.fab);
+
         if (!UsersLoginState.getIsManger())fab.hide();//如果用户不是管理员，添加公告按钮不可见
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

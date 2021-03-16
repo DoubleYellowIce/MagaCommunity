@@ -23,6 +23,10 @@ import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.daimajia.slider.library.Tricks.ViewPagerEx;
 import com.google.android.material.navigation.NavigationView;
 import com.j256.ormlite.stmt.query.In;
+import com.kongzue.dialog.interfaces.OnDialogButtonClickListener;
+import com.kongzue.dialog.util.BaseDialog;
+import com.kongzue.dialog.util.DialogSettings;
+import com.kongzue.dialog.v3.MessageDialog;
 
 import android.content.ClipData;
 import android.content.Context;
@@ -52,7 +56,6 @@ public class MagaCommunity extends AppCompatActivity implements BaseSliderView.O
         private BaseAdapter mAdapter = null;
         private ArrayList<Icon> mData = null;
         private DrawerLayout drawerLayout;
-
         @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +63,7 @@ public class MagaCommunity extends AppCompatActivity implements BaseSliderView.O
             setContentView(R.layout.activity_maga_community);
             androidx.appcompat.widget.Toolbar toolbar=(Toolbar) findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
+            DialogSettings.style = DialogSettings.STYLE.STYLE_IOS;
             mDemoSlider = (SliderLayout) findViewById(R.id.slider);
             drawerLayout=(DrawerLayout) findViewById(R.id.drawer_layout);
             ActionBar actionBar=getSupportActionBar();
@@ -80,10 +84,28 @@ public class MagaCommunity extends AppCompatActivity implements BaseSliderView.O
                 public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                     switch (menuItem.getItemId()){
                         case R.id.ic_login_state:
-                            if (menuItem.getTitle() == "登录账号") {
+                            String title=menuItem.getTitle().toString();
+                            if (title.equals("登录账号")) {
                                 Intent intent=new Intent(MagaCommunity.this,log_in_activity.class);
                                 startActivity(intent);
                                 finish();
+                            }else if(title.equals("退出账号")){
+                                MessageDialog.show(MagaCommunity.this,"温馨提示","您确定要退出账号?","确定","取消").setOkButton(new OnDialogButtonClickListener() {
+                                    @Override
+                                    public boolean onClick(BaseDialog baseDialog, View v) {
+                                        UsersLoginState.setLoginstateNegative();
+                                        if (UsersLoginState.getIsManger())UsersLoginState.setIsManagerstateNegative();
+                                        SetLoginText(menuItem);
+                                        SetHeaderView(circleImageView,textView);
+                                        return false;
+                                    }
+                                }).setCancelButton(new OnDialogButtonClickListener() {
+                                    @Override
+                                    public boolean onClick(BaseDialog baseDialog, View v) {
+                                        return false;
+                                    }
+                                });
+
                             }
                             break;
                         case R.id.ic_help:
@@ -94,12 +116,9 @@ public class MagaCommunity extends AppCompatActivity implements BaseSliderView.O
                     return false;
                 }
             });
-
             HashMap<String, Integer> file_maps = new HashMap<String, Integer>();
             file_maps.put("小区是我家，文明靠大家", R.drawable.one);
             file_maps.put("戴口罩防感染", R.drawable.ic_virus);
-    //        file_maps.put("待定", R.drawable.three);
-    //        file_maps.put("待定1", R.drawable.four);
             for (String name : file_maps.keySet()) {
                 TextSliderView textSliderView = new TextSliderView(this);
                 // initialize a SliderLayout
