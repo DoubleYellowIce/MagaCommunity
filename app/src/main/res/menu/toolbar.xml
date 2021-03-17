@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-<item
+    <item
+        android:id="@+id/picture"
+        android:icon="@drawable/ic_picture"
+        android:title="图片"
+        app:showAsAction="always"
+        />
+    <item
     android:id="@+id/send"
     android:icon="@drawable/ic_send"
     android:title="发送"
     app:showAsAction="always"
     />
+
+
 </menu>
