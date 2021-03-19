@@ -14,7 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name="com.DYI.android.home.log_in_activity"></activity>
+        <activity android:name="com.DYI.android.home.log_in_activity">
+
+        </activity>
         <activity
             android:name="com.DYI.android.Repair.repairee_actitvity"
             android:label="预约表格填写"></activity>
@@ -26,11 +28,7 @@
             android:name="com.DYI.android.bulletin.Bulletin_add"
             android:label="新公告" />
         <activity android:name="com.DYI.android.home.MagaCommunity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name="com.DYI.android.bulletin.bulletin"
@@ -40,7 +38,12 @@
         <activity
             android:name="com.DYI.android.weather.WelcomeActivity"
             android:screenOrientation="fullSensor"
-            android:theme="@style/LaunchTheme" />
+            android:theme="@style/LaunchTheme" >
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
         <activity
             android:name="com.DYI.android.weather.feature.home.MainActivity"
             android:screenOrientation="fullSensor" />
@@ -57,5 +60,4 @@
             android:label="年水电费"
             android:screenOrientation="fullSensor" />
     </application>
-
 </manifest>

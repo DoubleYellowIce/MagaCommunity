@@ -4,6 +4,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import com.baronzhang.android.weather.R;
+import com.bumptech.glide.Glide;
 import com.kongzue.dialog.interfaces.OnDialogButtonClickListener;
 import com.kongzue.dialog.util.BaseDialog;
 import com.kongzue.dialog.v3.MessageDialog;
@@ -11,7 +12,7 @@ import com.kongzue.dialog.v3.Notification;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
-import com.luck.pictureselector.GlideEngine;
+
 import com.luck.picture.lib.entity.LocalMedia;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import android.content.Context;
@@ -95,11 +96,6 @@ public class Bulletin_add extends AppCompatActivity {
                             }
                         });
                 break;
-            case R.id.picture:
-                PictureSelector.create(this)
-                        .openGallery(PictureMimeType.ofImage())
-                        .imageEngine(GlideEngine.createGlideEngine()) // Please refer to the Demo GlideEngine.java
-                        .forResult(PictureConfig.CHOOSE_REQUEST);
 
 
             default:
@@ -107,20 +103,7 @@ public class Bulletin_add extends AppCompatActivity {
         }
         return true;
     }
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data){
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) {
-            switch (requestCode) {
-                case PictureConfig.CHOOSE_REQUEST:
-                    // onResult Callback
-                    List<LocalMedia> selectList = PictureSelector.obtainMultipleResult(data);
-                    break;
-                default:
-                    break;
-            }
-        }
-    }
+
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         name= (MaterialEditText) findViewById(R.id.ic_name);
         content=(MaterialEditText) findViewById(R.id.ic_content);
