@@ -1,24 +1,21 @@
 package com.DYI.android.bulletin;
 
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
-import com.DYI.android.bulletin.Bulltins;
-import com.DYI.android.bulletin.BulltinsContentActivity;
-import com.DYI.android.home.MagaCommunity;
 import com.baronzhang.android.weather.R;
+import com.bumptech.glide.Glide;
 import com.kongzue.dialog.interfaces.OnDialogButtonClickListener;
 import com.kongzue.dialog.util.BaseDialog;
-import com.kongzue.dialog.util.DialogSettings;
 import com.kongzue.dialog.v3.MessageDialog;
 import com.kongzue.dialog.v3.Notification;
-import com.kongzue.dialog.v3.TipDialog;
-import com.rengwuxian.materialedittext.MaterialEditText;
+import com.luck.picture.lib.PictureSelector;
+import com.luck.picture.lib.config.PictureConfig;
+import com.luck.picture.lib.config.PictureMimeType;
 
+import com.luck.picture.lib.entity.LocalMedia;
+import com.rengwuxian.materialedittext.MaterialEditText;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -28,9 +25,7 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
-
-import org.litepal.LitePal;
+import java.util.List;
 
 public class Bulletin_add extends AppCompatActivity {
     private SharedPreferences pref;
@@ -101,14 +96,21 @@ public class Bulletin_add extends AppCompatActivity {
                             }
                         });
                 break;
+
+
             default:
                 break;
         }
         return true;
     }
+
     public boolean onKeyDown(int keyCode, KeyEvent event) {
+        name= (MaterialEditText) findViewById(R.id.ic_name);
+        content=(MaterialEditText) findViewById(R.id.ic_content);
+        String str1=name.getText().toString();
+        String str2=content.getText().toString();
         if (keyCode == KeyEvent.KEYCODE_BACK) {//当返回按键被按下
-            if (!editState){
+            if (!editState&&!str1.isEmpty()&&!str2.isEmpty()){
                 MessageDialog.show(Bulletin_add.this, "温馨提示", "是否保存草稿？", "保存", "丢弃").
                         setOkButton(new OnDialogButtonClickListener() {
                             @Override

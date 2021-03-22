@@ -3,6 +3,7 @@ package com.DYI.android.weather;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.DYI.android.home.MagaCommunity;
 import com.baronzhang.android.weather.base.BaseActivity;
 import com.baronzhang.android.library.util.system.StatusBarHelper;
 import com.DYI.android.weather.feature.home.MainActivity;
@@ -33,7 +34,7 @@ public class WelcomeActivity extends BaseActivity {
     }
 
     private void gotoMainPage() {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, MagaCommunity.class);
 
         startActivity(intent);
         // 修复 Android 9.0 下 Activity 跳转动画导致的启动页闪屏的问题
