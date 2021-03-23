@@ -108,7 +108,6 @@ public class repairee_actitvity extends AppCompatActivity {
         ArrayList<String> strings=new ArrayList<String>();
         for (int i=1;i<=10;i++){
             BuildingBean buildingBean=new BuildingBean(i,i+"");
-            strings.add(i+"");
             options1Items.add(buildingBean);
         }
     }
