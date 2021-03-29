@@ -4,5 +4,6 @@
     <version value="2"></version>
     <list>
     <mapping class="com.DYI.android.bulletin.Bulltins"></mapping>
+    <mapping class="com.DYI.android.Repair.RepairRequestForm"></mapping>
     </list>
 </litepal>

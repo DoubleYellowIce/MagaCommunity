@@ -50,6 +50,7 @@ public class repairee_actitvity extends AppCompatActivity {
     private ArrayList<EquipBean> equipBeanArrayList=new ArrayList<>();
     public TimePickerView pvTime;
     private OptionsPickerView pvOptions;
+    private String repaireeName;
     private OptionsPickerView equOptions;
     private EquipBean[] equipBeans={new EquipBean(1,"供水相关"),
             new EquipBean(2,"供电相关"),
@@ -74,7 +75,7 @@ public class repairee_actitvity extends AppCompatActivity {
         androidx.appcompat.widget.Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Intent intent = getIntent();
-        String repaireeName = intent.getStringExtra(repairee_NAME);
+        repaireeName = intent.getStringExtra(repairee_NAME);
         TextView textView = (TextView) findViewById(R.id.repairee_name);
         textView.setText("技师名称" + ": " + repaireeName);
         editTextTime = (EditText) findViewById(R.id.time);
@@ -189,6 +190,14 @@ public class repairee_actitvity extends AppCompatActivity {
                                 }
                                 else if(!editTextTime.getText().toString().isEmpty()&&!editTextDes.getText().toString().isEmpty()&&!editTextEqu.getText().toString().isEmpty()&&!editTextPhoneNum.getText().toString().isEmpty()&&!editTextLoc.getText().toString().isEmpty())
                                 {
+
+                                    RepairRequestForm repairRequestForm=new RepairRequestForm();
+                                    repairRequestForm.setRepaireeName(repaireeName);
+                                    repairRequestForm.setAddress(editTextLoc.getText().toString());
+                                    repairRequestForm.setDetailDescription(editTextDes.getText().toString());
+                                    repairRequestForm.setPhoneNum(editTextPhoneNum.getText().toString());
+                                    repairRequestForm.setTime(editTextTime.getText().toString());
+                                    repairRequestForm.save();
                                     MessageDialog.show(repairee_actitvity.this,"温馨提示",
                                             "预约成功,请按预约时间在家等候，届时水电工将与您电话联系。") ;
                                     Intent intent=new Intent(repairee_actitvity.this,RepairWelcomeActivity.class);
