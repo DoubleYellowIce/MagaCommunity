@@ -22,12 +22,13 @@ public class RepairRequestForm extends LitePalSupport {
     public String getRepaireeName(){
         return repaireeName;
     }
-    private void setBrokenEquipment(String brokenEquipment){
+    public void setBrokenEquipment(String brokenEquipment){
         this.brokenEquipment=brokenEquipment;
     }
     public String getBrokenEquipment(){
         return brokenEquipment;
     }
+
     public void setAddress(String address){
         this.address=address;
     }

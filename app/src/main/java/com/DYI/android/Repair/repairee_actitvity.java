@@ -197,6 +197,7 @@ public class repairee_actitvity extends AppCompatActivity {
                                     repairRequestForm.setDetailDescription(editTextDes.getText().toString());
                                     repairRequestForm.setPhoneNum(editTextPhoneNum.getText().toString());
                                     repairRequestForm.setTime(editTextTime.getText().toString());
+                                    repairRequestForm.setBrokenEquipment(editTextEqu.getText().toString());
                                     repairRequestForm.save();
                                     MessageDialog.show(repairee_actitvity.this,"温馨提示",
                                             "预约成功,请按预约时间在家等候，届时水电工将与您电话联系。") ;
