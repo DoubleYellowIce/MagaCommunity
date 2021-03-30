@@ -8,6 +8,9 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+
+import com.baronzhang.android.weather.R;
+
 import java.util.List;
 
 public class RepaireeRequestFormAdapter extends ArrayAdapter<RepairRequestForm> {
@@ -26,12 +29,13 @@ public class RepaireeRequestFormAdapter extends ArrayAdapter<RepairRequestForm> 
         if (convertView == null) {
             view = LayoutInflater.from(getContext()).inflate(ResoureId, parent, false);
             viewHolder = new ViewHolder();
+            viewHolder.User= (TextView) view.findViewById(R.id.user_name);
             view.setTag(viewHolder); // 将ViewHolder存储在View中
         } else {
             view = convertView;
             viewHolder = (ViewHolder) view.getTag(); // 重新获取ViewHolder
         }
-        viewHolder.User.setText(repairRequestForm.getAddress());
+        viewHolder.User.setText(repairRequestForm.getAddress()+"维修订单");
         return view;
     }
     class ViewHolder {

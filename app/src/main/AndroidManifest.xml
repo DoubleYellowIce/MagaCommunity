@@ -14,8 +14,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name="com.DYI.android.Repair.RepairMangerActivity"></activity>
-        <activity android:name="com.DYI.android.home.log_in_activity"></activity>
+        <activity android:name="com.DYI.android.Repair.RepaireeRequsetFormRead"></activity>
+        <activity
+            android:name="com.DYI.android.Repair.RepairMangerActivity"
+            android:label="待处理订单"></activity>
+        <activity android:name="com.DYI.android.home.log_in_activity" />
         <activity
             android:name="com.DYI.android.Repair.repairee_actitvity"
             android:label="预约表格填写" />
@@ -26,7 +29,7 @@
         <activity
             android:name="com.DYI.android.bulletin.Bulletin_add"
             android:label="新公告" />
-        <activity android:name="com.DYI.android.home.MagaCommunity"></activity>
+        <activity android:name="com.DYI.android.home.MagaCommunity" />
         <activity
             android:name="com.DYI.android.bulletin.bulletin"
             android:label="公告栏"
