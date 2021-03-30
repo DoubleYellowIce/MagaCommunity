@@ -9,6 +9,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.DYI.android.Repair.RepairMangerActivity;
 import com.DYI.android.Repair.RepairWelcomeActivity;
 import com.DYI.android.bulletin.UsersLoginState;
 import com.DYI.android.bulletin.bulletin;
@@ -192,8 +193,15 @@ public class MagaCommunity extends AppCompatActivity implements BaseSliderView.O
             return true;
         }
         private void gotoRepairWelcomeActivity() {
-            Intent intent=new Intent(MagaCommunity.this, RepairWelcomeActivity.class);
-            startActivity(intent);
+            Intent intent;
+            if (!UsersLoginState.getIsManger()) {
+                intent = new Intent(MagaCommunity.this, RepairWelcomeActivity.class);
+                startActivity(intent);
+            }else  if (UsersLoginState.getIsManger()){
+                intent =new Intent(MagaCommunity.this, RepairMangerActivity.class);
+                startActivity(intent);
+            }
+
             finish();
         }
 

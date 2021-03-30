@@ -40,21 +40,22 @@ import com.kongzue.dialog.v3.MessageDialog;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+
 
 public class repairee_actitvity extends AppCompatActivity {
     public static final String repairee_NAME = "repairee_name";
     public static final String repairee_IMAGE_ID = "repairee_image_id";
     public static final String repairee_skill = "repairee_skill";
     private ArrayList<BuildingBean> options1Items = new ArrayList<>();
+    private ArrayList<EquipBean> equipBeanArrayList=new ArrayList<>();
     public TimePickerView pvTime;
     private OptionsPickerView pvOptions;
+    private String repaireeName;
     private OptionsPickerView equOptions;
-    private ArrayList<EquipBean> equipBeanArrayList=new ArrayList<>();
-    private EquipBean[] equipBeans={new EquipBean("供水相关"),
-            new EquipBean("供电相关"),
-            new EquipBean("供气相关"),
-            new EquipBean("其它")
+    private EquipBean[] equipBeans={new EquipBean(1,"供水相关"),
+            new EquipBean(2,"供电相关"),
+            new EquipBean(3,"供气相关"),
+            new EquipBean(4,"其它")
     };
     EditText editTextTime;
     EditText editTextPhoneNum;
@@ -67,15 +68,16 @@ public class repairee_actitvity extends AppCompatActivity {
         setContentView(R.layout.activity_repairee_actitvity);
         DialogSettings.style = DialogSettings.STYLE.STYLE_IOS;
         addBuildingBean();
+        addEquipBean();
         initTimePicker();
         initOptionPicker();
         initEquOptionPicker();
         androidx.appcompat.widget.Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Intent intent = getIntent();
-        String repaireeName = intent.getStringExtra(repairee_NAME);
+        repaireeName = intent.getStringExtra(repairee_NAME);
         TextView textView = (TextView) findViewById(R.id.repairee_name);
-        textView.setText("技师名称" + ":" + repaireeName);
+        textView.setText("技师名称" + ": " + repaireeName);
         editTextTime = (EditText) findViewById(R.id.time);
         editTextDes=(EditText) findViewById(R.id.description);
         editTextEqu=(EditText) findViewById(R.id.equipment);
@@ -83,6 +85,14 @@ public class repairee_actitvity extends AppCompatActivity {
         editTextPhoneNum=(EditText) findViewById(R.id.phone_number);
         editTextLoc.setInputType(InputType.TYPE_NULL);
         editTextTime.setInputType(InputType.TYPE_NULL);
+        editTextEqu.setInputType(InputType.TYPE_NULL);
+        editTextEqu.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                equOptions.show();
+                return false;
+            }
+        });
         editTextLoc.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -93,7 +103,7 @@ public class repairee_actitvity extends AppCompatActivity {
         editTextTime.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
-                equOptions.show();
+                pvTime.show();
                 return false;
             }
         });
@@ -120,19 +130,14 @@ public class repairee_actitvity extends AppCompatActivity {
         pvTime = new TimePickerBuilder(this, new OnTimeSelectListener() {
             @Override
             public void onTimeSelect(Date date, View v) {
-
-                Log.i("pvTime", "onTimeSelect");
                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy年-MM月-dd号 HH点");
                 String dateString = formatter.format(date);
                 editTextTime.setText(dateString + "");
-
-
             }
         })
                 .setTimeSelectChangeListener(new OnTimeSelectChangeListener() {
                     @Override
                     public void onTimeSelectChanged(Date date) {
-                        Log.i("pvTime", "onTimeSelectChanged");
                     }
                 })
                 .setType(new boolean[]{true, true, true, true, false, false})
@@ -185,6 +190,15 @@ public class repairee_actitvity extends AppCompatActivity {
                                 }
                                 else if(!editTextTime.getText().toString().isEmpty()&&!editTextDes.getText().toString().isEmpty()&&!editTextEqu.getText().toString().isEmpty()&&!editTextPhoneNum.getText().toString().isEmpty()&&!editTextLoc.getText().toString().isEmpty())
                                 {
+
+                                    RepairRequestForm repairRequestForm=new RepairRequestForm();
+                                    repairRequestForm.setRepaireeName(repaireeName);
+                                    repairRequestForm.setAddress(editTextLoc.getText().toString());
+                                    repairRequestForm.setDetailDescription(editTextDes.getText().toString());
+                                    repairRequestForm.setPhoneNum(editTextPhoneNum.getText().toString());
+                                    repairRequestForm.setTime(editTextTime.getText().toString());
+                                    repairRequestForm.setBrokenEquipment(editTextEqu.getText().toString());
+                                    repairRequestForm.save();
                                     MessageDialog.show(repairee_actitvity.this,"温馨提示",
                                             "预约成功,请按预约时间在家等候，届时水电工将与您电话联系。") ;
                                     Intent intent=new Intent(repairee_actitvity.this,RepairWelcomeActivity.class);
@@ -232,8 +246,8 @@ public class repairee_actitvity extends AppCompatActivity {
             @Override
             public void onOptionsSelect(int options1, int options2, int options3, View v) {
                 //返回的分别是三个级别的选中位置
-                String tx = options1Items.get(options1).getPickerViewText()+"楼"+options1Items.get(options2).getPickerViewText()+"层"+options1Items.get(options3).getPickerViewText()+"户";
-                editTextLoc.setText(tx);
+                String tx = equipBeanArrayList.get(options1).getPickerViewText();
+                editTextEqu.setText(tx);
             }
         })
                 .setTitleText("故障设备选择")
@@ -244,7 +258,7 @@ public class repairee_actitvity extends AppCompatActivity {
                 .setBgColor(Color.WHITE)
                 .isRestoreItem(true)//切换时是否还原，设置默认选中第一项。
                 .isCenterLabel(false) //是否只显示中间选中项的label文字，false则每项item全部都带有label。
-                .setLabels("栋", "层", "户")
+                .setLabels("", "", "")
                 .setOptionsSelectChangeListener(new OnOptionsSelectChangeListener() {
                     @Override
                     public void onOptionsSelectChanged(int options1, int options2, int options3) {
