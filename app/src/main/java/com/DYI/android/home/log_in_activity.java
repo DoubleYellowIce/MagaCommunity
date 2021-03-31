@@ -25,12 +25,12 @@ public class log_in_activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in_activity);
-        EditText idEdittext= (EditText) findViewById(R.id.ic_inputId);
-        EditText passwordEdit=(EditText) findViewById(R.id.ic_inputPassword);
-        Button LogInButton=(Button) findViewById(R.id.ic_login);
+        EditText idEdittext= findViewById(R.id.ic_inputId);
+        EditText passwordEdit= findViewById(R.id.ic_inputPassword);
+        Button LogInButton= findViewById(R.id.ic_login);
         DialogSettings.style = DialogSettings.STYLE.STYLE_IOS;
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        rememberPass=(CheckBox) findViewById(R.id.checkbox);
+        rememberPass= findViewById(R.id.checkbox);
         boolean isRemember =preferences.getBoolean("remember password",false);
         if (isRemember){
             String account=preferences.getString("account","");
@@ -70,6 +70,7 @@ public class log_in_activity extends AppCompatActivity {
         UsersLoginState.setLoginstatePositive();
         Intent intent=new Intent(log_in_activity.this,MagaCommunity.class);
         startActivity(intent);
+        finish();
     }
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {//当返回按键被按下
