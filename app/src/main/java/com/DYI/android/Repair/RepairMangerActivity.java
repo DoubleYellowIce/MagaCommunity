@@ -1,7 +1,6 @@
 package com.DYI.android.Repair;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -24,10 +23,17 @@ public class RepairMangerActivity extends AppCompatActivity {
         RepaireeRequestFormAdapter repaireeRequestFormAdapter=new RepaireeRequestFormAdapter(RepairMangerActivity.this,R.layout.repairee_form_item,RepairRequestForms);
         ListView listView=findViewById(R.id.list_view);
         listView.setAdapter(repaireeRequestFormAdapter);
-        listView.setOnClickListener(new AdapterView.OnItemClickListener(){
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 RepairRequestForm repairRequestForm=RepairRequestForms.get(i);
+                RepaireeRequsetFormRead.actionStart(RepairMangerActivity.this,
+                        repairRequestForm.getPhoneNum(),
+                        repairRequestForm.getAddress(),
+                        repairRequestForm.getBrokenEquipment(),
+                        repairRequestForm.getDetailDescription(),
+                        repairRequestForm.getTime()
+                );
             }
         });
     }

@@ -35,7 +35,6 @@ public class BulltinsContentActivity extends AppCompatActivity {
         intent.putExtra("news_content", newsContent);
         context.startActivity(intent);
     }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
