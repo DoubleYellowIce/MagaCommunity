@@ -44,8 +44,7 @@ import java.util.Date;
 
 public class repairee_actitvity extends AppCompatActivity {
     public static final String repairee_NAME = "repairee_name";
-    public static final String repairee_IMAGE_ID = "repairee_image_id";
-    public static final String repairee_skill = "repairee_skill";
+
     private ArrayList<BuildingBean> options1Items = new ArrayList<>();
     private ArrayList<EquipBean> equipBeanArrayList=new ArrayList<>();
     public TimePickerView pvTime;
