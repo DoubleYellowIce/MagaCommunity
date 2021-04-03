@@ -56,8 +56,9 @@ static class ViewHolder extends RecyclerView.ViewHolder {
             public void onClick(View v) {
                 int position = holder.getAdapterPosition();
                 Repairee repairee = repaireesList.get(position);
-                Intent intent = new Intent(mContext, RepaireeRequsetFormRead.class);
+                Intent intent = new Intent(mContext, repairee_actitvity.class);
                 intent.putExtra(repairee_actitvity.repairee_NAME, repairee.getName());
+
                 mContext.startActivity(intent);
             }
         });

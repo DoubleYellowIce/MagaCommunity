@@ -44,12 +44,7 @@ public class RepairWelcomeActivity extends AppCompatActivity {
         recyclerView.setAdapter(repaireeAdapter);
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                refreshRepairees();
-            }
-        });
+        swipeRefreshLayout.setOnRefreshListener(() -> refreshRepairees());
     }
 
     private void refreshRepairees() {

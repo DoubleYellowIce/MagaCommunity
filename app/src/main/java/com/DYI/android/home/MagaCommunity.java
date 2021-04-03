@@ -11,6 +11,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.DYI.android.Repair.RepairMangerActivity;
 import com.DYI.android.Repair.RepairWelcomeActivity;
+import com.DYI.android.Repair.repairee_actitvity;
 import com.DYI.android.bulletin.UsersLoginState;
 import com.DYI.android.bulletin.bulletin;
 import com.DYI.android.fee.BarChartActivityMultiDataset;
