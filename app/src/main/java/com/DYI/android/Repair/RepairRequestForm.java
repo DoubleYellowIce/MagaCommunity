@@ -10,6 +10,7 @@ public class RepairRequestForm extends LitePalSupport {
     private String address;
     private String DetailDescription;
     private String Time;
+    private Boolean isUrgent=false;//是否紧急
     public void setPhoneNum(String  phoneNum){
         this.phoneNum=phoneNum;
     }
@@ -46,5 +47,11 @@ public class RepairRequestForm extends LitePalSupport {
     }
     public void  setTime(String time){
         this.Time=time;
+    }
+    public void  setIsUrgent(){
+        this.isUrgent =true;
+    }
+    public Boolean  getIsUrgent(){
+        return isUrgent;
     }
 }

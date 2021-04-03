@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <litepal>
     <dbname value = "BulletinsBoard"></dbname>
-    <version value="3"></version>
+    <version value="4"></version>
     <list>
     <mapping class="com.DYI.android.bulletin.Bulltins"></mapping>
     <mapping class="com.DYI.android.Repair.RepairRequestForm"></mapping>

@@ -2,6 +2,7 @@ package com.DYI.android.Repair;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -16,6 +17,7 @@ public class RepairMangerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_repair_manger);
         androidx.appcompat.widget.Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -32,7 +34,9 @@ public class RepairMangerActivity extends AppCompatActivity {
                         repairRequestForm.getAddress(),
                         repairRequestForm.getBrokenEquipment(),
                         repairRequestForm.getDetailDescription(),
-                        repairRequestForm.getTime()
+                        repairRequestForm.getTime(),
+                        repairRequestForm.getRepaireeName(),
+                        repairRequestForm.getIsUrgent()
                 );
             }
         });
@@ -41,6 +45,7 @@ public class RepairMangerActivity extends AppCompatActivity {
         List<RepairRequestForm> repairRequestForms= LitePal.findAll(RepairRequestForm.class);
         for (RepairRequestForm repairRequestForm:repairRequestForms){
             RepairRequestForms.add(repairRequestForm);
+            Log.d("111111",""+repairRequestForm.getAddress());
         }
     }
 }

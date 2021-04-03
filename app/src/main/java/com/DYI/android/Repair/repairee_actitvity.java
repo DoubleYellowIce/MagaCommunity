@@ -16,6 +16,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -44,14 +46,14 @@ import java.util.Date;
 
 public class repairee_actitvity extends AppCompatActivity {
     public static final String repairee_NAME = "repairee_name";
-    public static final String repairee_IMAGE_ID = "repairee_image_id";
-    public static final String repairee_skill = "repairee_skill";
+
     private ArrayList<BuildingBean> options1Items = new ArrayList<>();
     private ArrayList<EquipBean> equipBeanArrayList=new ArrayList<>();
     public TimePickerView pvTime;
     private OptionsPickerView pvOptions;
     private String repaireeName;
     private OptionsPickerView equOptions;
+    private boolean isChecked=false;
     private EquipBean[] equipBeans={new EquipBean(1,"供水相关"),
             new EquipBean(2,"供电相关"),
             new EquipBean(3,"供气相关"),
@@ -62,6 +64,7 @@ public class repairee_actitvity extends AppCompatActivity {
     EditText editTextLoc;
     EditText editTextEqu;
     EditText editTextDes;
+    CheckBox checkBox;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +81,7 @@ public class repairee_actitvity extends AppCompatActivity {
         repaireeName = intent.getStringExtra(repairee_NAME);
         TextView textView = (TextView) findViewById(R.id.repairee_name);
         textView.setText("技师名称" + ": " + repaireeName);
+        checkBox=findViewById(R.id.is_urgent);
         editTextTime = (EditText) findViewById(R.id.time);
         editTextDes=(EditText) findViewById(R.id.description);
         editTextEqu=(EditText) findViewById(R.id.equipment);
@@ -105,6 +109,16 @@ public class repairee_actitvity extends AppCompatActivity {
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 pvTime.show();
                 return false;
+            }
+        });
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b){
+                    isChecked=true;
+                }else{
+                    isChecked=false;
+                }
             }
         });
     }
@@ -198,6 +212,7 @@ public class repairee_actitvity extends AppCompatActivity {
                                     repairRequestForm.setPhoneNum(editTextPhoneNum.getText().toString());
                                     repairRequestForm.setTime(editTextTime.getText().toString());
                                     repairRequestForm.setBrokenEquipment(editTextEqu.getText().toString());
+                                    if (isChecked)repairRequestForm.setIsUrgent();
                                     repairRequestForm.save();
                                     MessageDialog.show(repairee_actitvity.this,"温馨提示",
                                             "预约成功,请按预约时间在家等候，届时水电工将与您电话联系。") ;
